@@ -2,8 +2,11 @@
 namespace Skel;
 
 class Request extends \Symfony\Component\HttpFoundation\Request implements Interfaces\Request {
+  protected $skelUri;
+
   public function getUri() {
-    return new Uri($this->getFullRequestUrl());
+    if (!$this->skelUri) $this->skelUri = new Uri($this->getFullRequestUrl());
+    return $this->skelUri;
   }
 
   public function getFullRequestUrl() {
